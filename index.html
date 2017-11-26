@@ -1,0 +1,116 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>拼图</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<style type="text/css">
+			table tr td {
+				border: 1px solid #ccc;
+			}
+			
+			body {
+				text-align: center;
+				margin: 10px;
+			}
+		</style>
+		<script type="text/javascript">
+			var imgs_new = new Array();
+
+			function sort_use() {
+				if(Math.random() > 0.5) {
+					return -1;
+				} else {
+					return 1;
+				}
+				var ret;
+				Math.random() > 0.5 ? ret = -1 : ret = 1;
+				return ret;
+			}
+
+			function play() {
+				var imgs = new Array();
+				for(var i = 0; i <= 7; i++) {
+					imgs[i] = "images/" + (i + 1) + ".png";
+				}
+
+				imgs[8] = "images/bai.jpg";
+				
+				imgs_new = imgs.sort(sort_use);
+				document.getElementById("i1").src = imgs_new[0];
+				document.getElementById("i2").src = imgs_new[1];
+				document.getElementById("i3").src = imgs_new[2];
+				document.getElementById("i4").src = imgs_new[3];
+				document.getElementById("i5").src = imgs_new[4];
+				document.getElementById("i6").src = imgs_new[5];
+				document.getElementById("i7").src = imgs_new[6];
+				document.getElementById("i8").src = imgs_new[7];
+				document.getElementById("i9").src = imgs_new[8];
+				{document.getElementById("i9").src="images/big.png";
+					alert("niyingle!");
+				}
+				
+			}
+
+			function img_click(img_index) {
+				var bai_index;
+				var cha;
+				var san;
+				for(var i = 0; i < imgs_new.length; i++) {
+					if(imgs_new[i] == "images/bai.jpg") {
+						bai_index = i + 1;
+						cha = Math.abs(img_index - bai_index);
+						if(cha == 3 || cha == 1) {
+							san = imgs_new[i];
+							imgs_new[i] = imgs_new[img_index - 1];
+							imgs_new[img_index - 1] = san;
+							document.getElementById("i" + bai_index).src = imgs_new[i];
+							document.getElementById("i" + img_index).src = imgs_new[img_index - 1];
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="开始拼图吧！！" onclick="play();">
+
+		<table cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td>
+					<img src="images/1.png" id="i1" onclick="img_click(1);">
+				</td>
+				<td>
+					<img src="images/2.png" id="i2" onclick="img_click(2);">
+				</td>
+				<td>
+					<img src="images/3.png" id="i3" onclick="img_click(3);">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="images/4.png" id="i4" onclick="img_click(4);">
+				</td>
+				<td>
+					<img src="images/5.png" id="i5" onclick="img_click(5);">
+				</td>
+				<td>
+					<img src="images/6.png" id="i6" onclick="img_click(6);">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="images/7.png" id="i7" onclick="img_click(7);">
+				</td>
+				<td>
+					<img src="images/8.png" id="i8" onclick="img_click(8);">
+				</td>
+				<td>
+					<img src="images/9.png" id="i9" onclick="img_click(9);">
+				</td>
+			</tr>
+		</table>
+
+	</body>
+
+</html>
